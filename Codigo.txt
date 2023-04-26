@@ -1,0 +1,59 @@
+// C++ code
+//
+#define ledverde1 13
+#define ledverde2 12
+#define ledamarilla1 11
+#define ledamarilla2 10
+#define ledroja1 9
+#define ledroja2 8
+int sonido;
+void setup()
+{
+  pinMode(ledverde1, OUTPUT);
+  pinMode(ledverde2, OUTPUT);
+  pinMode(ledamarilla1, OUTPUT);
+  pinMode(ledamarilla2, OUTPUT);
+  pinMode(ledroja1, OUTPUT);
+  pinMode(ledroja2, OUTPUT);
+  pinMode(7, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  encender(ledverde2);
+  encender(ledverde1);
+  delay(5000); 
+  apagar(ledverde1); 
+  apagar(ledverde2); 
+  encender(ledamarilla1);
+  encender(ledamarilla2);
+  delay(3000); 
+  apagar(ledamarilla1); 
+  apagar(ledamarilla2); 
+   encender(ledroja1);
+  encender(ledroja2);
+   sonido = digitalRead(9);
+  if(sonido == HIGH){
+    sonar(10, 250);
+  }
+  apagar(ledroja1); 
+  apagar(ledroja2); 
+  sonido = digitalRead(9);
+}
+void encender(int led_encender){
+  digitalWrite(led_encender, HIGH);
+}
+void apagar(int led_apagar){
+  digitalWrite(led_apagar, LOW);
+}
+void sonar(int repeticiones, int demora){
+    for(int contador = 0; contador<repeticiones; contador++){
+   tone(7, 880, 500);
+   delay(demora);
+   noTone(7);
+   delay(demora);
+   tone(7, 880, 500);
+  
+  }
+}
